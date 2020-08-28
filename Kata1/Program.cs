@@ -20,7 +20,7 @@ namespace Kata1
                 {
                     for (int character = 0; character < 3; ++character)
                     {
-                        characters.
+                        characters[entry, line, character] = !lines[character][entry].Equals(" ");
                     }
                 }
 
