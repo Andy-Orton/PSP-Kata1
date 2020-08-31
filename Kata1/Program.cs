@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Kata1
 {
     class Program
     {
+        const string STRINGPATH = "./Data/BankOrcStory1_SampleInput.txt";
+
         //Bank of digits 
         //public static readonly char[,,] DigitCodes = new char[10, 3, 3]
         //{
@@ -23,7 +26,25 @@ namespace Kata1
 
         static void Main(string[] args)
         {
+            
+        }
 
+        public List<String> ReadFile()
+        {
+            List<string> lines = new List<string>();
+
+
+            using (StreamReader streamReader = File.OpenText(STRINGPATH))
+            {
+
+                string line;
+                while ((line = streamReader.ReadLine()) != null )
+                {
+                    lines.Add(line);
+                }
+            }
+
+            return lines;
         }
 
         public const int DIGITROWCOUNT = 3;
@@ -49,7 +70,7 @@ namespace Kata1
                         for (int charColIndex = 0; charColIndex < DIGITCOLCOUNT; ++charColIndex)
                         {
                             //Since an account number is comprised of four rows of characters and a digit is comprised of a 3x3 matrix of characters, offsets (e.g. [accountNumberIndex * (DIGITROWCOUNT + 1) + charRowIndex])
-                            //are required to properly read digits in to memory
+                            //are required to properly read digits in to memory 
                             charBuffer[charRowIndex, charColIndex, digitIndex] = lines[accountNumberIndex * (DIGITROWCOUNT + 1) + charRowIndex][digitIndex * DIGITCOLCOUNT + charColIndex];
                         }
                     }
