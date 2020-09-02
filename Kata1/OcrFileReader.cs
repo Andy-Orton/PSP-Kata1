@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Kata1
 {
-    class OcrFileReader
+    public class OcrFileReader
     {
         const string FILE_PATH = "../../../Data/BankOrcStory1_SampleInput.txt";
 
@@ -42,13 +42,13 @@ namespace Kata1
 
 
             //run through each account number
-            for (int accountNumberIndex = 0; accountNumberIndex < lines.Count / AccountNumber.DIGIT_ROW_COUNT; ++accountNumberIndex)
+            for (int accountNumberIndex = 0; accountNumberIndex <= lines.Count / AccountNumber.DIGIT_ROW_COUNT; ++accountNumberIndex)
             {
                 //for each account number iterate through every digit
                 for (int digitIndex = 0; digitIndex < AccountNumber.ACCOUNT_NUMBER_LENGTH; ++digitIndex)
                 {
                     //read through 3x3 matrix representing a digit
-                    for (int charRowIndex = 0; charRowIndex < AccountNumber.DIGIT_ROW_COUNT; ++charRowIndex)
+                    for (int charRowIndex = 0; charRowIndex < AccountNumber.DIGIT_ROW_COUNT - 1; ++charRowIndex)
                     {
                         for (int charColIndex = 0; charColIndex < AccountNumber.DIGIT_CHAR_LENGTH; ++charColIndex)
                         {
@@ -57,12 +57,13 @@ namespace Kata1
                             //charBuffer[charRowIndex, charColIndex, digitIndex] = lines[accountNumberIndex * (DIGITROWCOUNT + 1) + charRowIndex][digitIndex * DIGITCOLCOUNT + charColIndex];
                             //Console.Out.WriteLine(lines[accountNumberIndex * DIGITROWCOUNT + charRowIndex]);
 
-                            bufferString += lines[(accountNumberIndex * AccountNumber.DIGIT_ROW_COUNT) + charRowIndex][(digitIndex * AccountNumber.DIGIT_CHAR_LENGTH) + charColIndex];
+                            bufferString += lines[(accountNumberIndex * AccountNumber.DIGIT_ROW_COUNT) + charRowIndex][digitIndex * AccountNumber.DIGIT_CHAR_LENGTH + charColIndex];
                         }
                         bufferString += "\n";
                     }
                     // Console.Out.WriteLine(bufferString);
                     accountNumberBuffer[digitIndex] = bufferString;
+                    bufferString = "";
                 }
                 // accountNumbers[accountNumberIndex] = new AccountNumber(accountNumberBuffer);
                 accountNumbers.Add(new AccountNumber(accountNumberBuffer));

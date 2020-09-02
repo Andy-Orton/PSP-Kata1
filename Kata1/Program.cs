@@ -9,8 +9,14 @@ namespace Kata1
        
         static void Main(string[] args)
         {
-           
-            
+
+            List<string> lines = OcrFileReader.ReadFile();
+            List<AccountNumber> acntNumbers =  OcrFileReader.ProcessRawAccountNumbers(lines);
+
+            foreach (AccountNumber accountNumber in acntNumbers)
+            {
+                Console.Out.WriteLine(accountNumber.ToString());
+            }
         }
 
            

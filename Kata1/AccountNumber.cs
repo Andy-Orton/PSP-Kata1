@@ -8,7 +8,7 @@ namespace Kata1
     {
         public const int ACCOUNT_NUMBER_LENGTH = 9;
         public const int DIGIT_CHAR_LENGTH = 3;
-        public const int DIGIT_ROW_COUNT = 3;
+        public const int DIGIT_ROW_COUNT = 4;
 
         public static readonly List<string> NUMBER_CODES = new List<string>() 
         {
@@ -16,7 +16,7 @@ namespace Kata1
             "| |\n" +
             "|_|\n",
 
-            "  |\n" +
+            "   \n" +
             "  |\n" +
             "  |\n",
 
@@ -54,6 +54,11 @@ namespace Kata1
         };
 
         public string[] digitStrings = new string[9];
+        public string[] DigitStrings
+        {
+            set { digitStrings = value; }
+            get => digitStrings;
+        }
     
         public int[] convertedDigits = new int[9];
 
@@ -62,13 +67,13 @@ namespace Kata1
             string str = "";
             for (int digitIndex = 0; digitIndex < ACCOUNT_NUMBER_LENGTH; ++digitIndex)
             {
-                str += digitStrings[digitIndex];
+                str += convertedDigits[digitIndex];
             }
 
             return str;
         }
 
-        public void convert()
+        public void Convert()
         {
             for (int digitIndex = 0; digitIndex < ACCOUNT_NUMBER_LENGTH; ++digitIndex)
             {
@@ -79,7 +84,7 @@ namespace Kata1
         public AccountNumber(string[] digits)
         {
             this.digitStrings = digits;
-            convert();
+            Convert();
         }
 
         public Boolean ValidChecksum()
