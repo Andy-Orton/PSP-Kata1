@@ -61,5 +61,53 @@ namespace Kata1.Test
 
         }
 
+        [Test]
+        public void DetectsInvalidTextDigit()
+        {
+            List<string> testDigits = new List<string>()
+            {
+                "___\n" +
+                "| |\n" +
+                "|_|\n",
+
+                "  |\n" +
+                "  |\n" +
+                "  |\n",
+
+                " _ \n" +
+                " _|\n" +
+                "|  \n",
+
+                " _ \n" +
+                "  |\n" +
+                " _|\n",
+
+                "|  \n" +
+                "|_|\n" +
+                "  |\n",
+
+                " _ \n" +
+                "|_ \n" +
+                " _|\n",
+
+                " _ \n" +
+                "|_ \n" +
+                "|_|\n",
+
+                " _ \n" +
+                "  |\n" +
+                "  |\n",
+
+                " _ \n" +
+                "|_|\n" +
+                "|_|\n"
+
+            };
+
+            AccountNumber accountNumber = new AccountNumber(testDigits.ToArray());
+
+            Assert.AreEqual("-1-1-1-1-15678", accountNumber.ToString());
+        }
+
     }
 }

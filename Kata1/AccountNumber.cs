@@ -60,36 +60,43 @@ namespace Kata1
             get => digitStrings;
         }
     
-        public int[] convertedDigits = new int[9];
+        public int[] decodedDigits = new int[9];
 
         public override string ToString()
         {
             string str = "";
             for (int digitIndex = 0; digitIndex < ACCOUNT_NUMBER_LENGTH; ++digitIndex)
             {
-                str += convertedDigits[digitIndex];
+                str += decodedDigits[digitIndex];
             }
 
             return str;
         }
 
-        public void Convert()
+        public void DecodeTextDigits()
         {
             for (int digitIndex = 0; digitIndex < ACCOUNT_NUMBER_LENGTH; ++digitIndex)
             {
-                convertedDigits[digitIndex] = NUMBER_CODES.IndexOf(digitStrings[digitIndex]);
+                decodedDigits[digitIndex] = NUMBER_CODES.IndexOf(digitStrings[digitIndex]);
             }
         }
 
         public AccountNumber(string[] digits)
         {
             this.digitStrings = digits;
-            Convert();
+            DecodeTextDigits();
         }
 
         public Boolean ValidChecksum()
         {
-            return true;
+            int sum = 0;
+
+            for (int i = 0; i < 10; ++i)
+            {
+                sum += decodedDigits[10 - i] * i;
+            }
+
+            return sum % 11 == 0;
         }
     }
 }
